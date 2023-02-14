@@ -60,7 +60,6 @@ const Pagination = ({ currentPage, setCurrentPage, lastPage }) => {
 
                 {currentPage > 2 ? btnPlaceholder : null}
 
-                {/* BUGFIX  */}
                 {currentPage === 1 || currentPage === lastPage ? null : (
                     <Button
                         colorScheme="blue"
