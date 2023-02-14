@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import CryptoTable from '../components/CryptoTable';
 import GlobalMarketStats from '../components/GlobalMarketStats';
 import { Box, Text } from '@chakra-ui/react';
@@ -21,7 +21,6 @@ const Home = () => {
             .then((data) => setCryptoTableData(data))
             .catch((err) => console.log(err));
     }, [cryptoTableDataUrl]);
-    const scrollToRef = useRef();
     return (
         <Box
             display="flex"
@@ -37,7 +36,6 @@ const Home = () => {
                 py="50px"
                 textAlign={'center'}
                 mx={'8px'}
-                ref={scrollToRef}
             >
                 Cryptocurrency Prices By Market Cap
             </Text>
@@ -47,7 +45,6 @@ const Home = () => {
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 lastPage={totalPages}
-                scrollToRef={scrollToRef}
             />
         </Box>
     );

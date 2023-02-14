@@ -40,11 +40,12 @@ const CryptoTableItem = ({ cryptos }) => {
             maximumFractionDigits: 0,
         }).format(number);
     };
+    const { tableTopRef } = useContext(CryptoContext);
 
     return (
         <>
             {cryptos.map((crypto, index) => (
-                <Tr key={crypto.id}>
+                <Tr key={crypto.id} ref={index === 0 ? tableTopRef : null}>
                     <Td>
                         <Box display="flex">
                             <FavouriteToggle

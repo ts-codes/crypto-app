@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { createContext, useReducer, useState } from 'react';
+import { createContext, useReducer, useState, useRef } from 'react';
 import cryptoReducer from './cryptoReducer';
 
 export const CryptoContext = createContext();
@@ -43,7 +43,7 @@ const CryptoProvider = ({ children }) => {
         });
         localStorage.removeItem('crypto_favourites');
     };
-
+    const tableTopRef = useRef();
     return (
         <CryptoContext.Provider
             value={{
@@ -53,6 +53,7 @@ const CryptoProvider = ({ children }) => {
                 selectedCurrency,
                 setSelectedCurrency,
                 deleteAllFavourites,
+                tableTopRef,
             }}
         >
             {children}

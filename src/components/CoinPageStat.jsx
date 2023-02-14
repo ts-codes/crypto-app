@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 
 const CoinPageStat = ({ label, data }) => {
     return (
@@ -10,8 +10,8 @@ const CoinPageStat = ({ label, data }) => {
                 minW={'150px'}
                 sx={{ borderBottom: '1px solid #718096' }}
             >
-                <Box>{label}</Box>
-                <Box>{!data ? '-' : data}</Box>
+                <Text textAlign={'left'}>{label}</Text>
+                <Text textAlign={'right'}>{!data ? '-' : data}</Text>
             </Flex>
         </>
     );

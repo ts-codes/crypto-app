@@ -32,7 +32,6 @@ const Chart = ({ chartData, numDays }) => {
             datasets: [
                 {
                     label: `Price in ${selectedCurrency.toUpperCase()}`,
-                    // 💡TODO change -> format the number to a currency
                     data: chartData?.map((index) => index[1]),
                     pointRadius: 0.25,
                     tension: 0.05,

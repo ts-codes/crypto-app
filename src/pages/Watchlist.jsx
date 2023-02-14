@@ -20,7 +20,6 @@ const Watchlist = () => {
             );
             const data = await res.json();
             setCoinData(data);
-            // setLoadingWatchlist(false) 🤔
         })();
     }
 
@@ -29,7 +28,6 @@ const Watchlist = () => {
             setFavouriteIds('');
             setCoinData('');
         } else {
-            // setLoadingWatchlist(true) 🤔
             setFavouriteIds(
                 favourites.map((favourite) => favourite.id).join('%2C')
             );
