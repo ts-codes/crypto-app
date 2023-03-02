@@ -8,6 +8,7 @@ import {
     StatHelpText,
     StatArrow,
     StatGroup,
+    Spinner,
 } from '@chakra-ui/react';
 
 const GlobalMarketStats = () => {
@@ -22,11 +23,25 @@ const GlobalMarketStats = () => {
         compactDisplay: 'short',
     });
 
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        fetch(statsUrl)
-            .then((res) => res.json())
-            .then((data) => setGlobalStats(data.data))
-            .catch((err) => console.log(err));
+        async function fetchData() {
+            try {
+                const res = await fetch(statsUrl);
+                if (!res.ok) {
+                    throw new Error(
+                        `Failed to fetch data. Status code: ${res.status}`
+                    );
+                }
+                const data = await res.json();
+                setGlobalStats(data.data);
+                setIsLoading(false);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        fetchData();
     }, [selectedCurrency]);
 
     return (
@@ -39,39 +54,62 @@ const GlobalMarketStats = () => {
             >
                 <Stat maxW="max-content" p="16px" pb="0px">
                     <StatLabel>Total Market Cap</StatLabel>
-                    <StatNumber>
-                        {formatNumber.format(
-                            globalStats.total_market_cap?.[selectedCurrency]
-                        )}
-                    </StatNumber>
-                    <StatHelpText>
-                        <StatArrow
-                            type={
-                                globalStats.market_cap_change_percentage_24h_usd >=
-                                0
-                                    ? 'increase'
-                                    : 'decrease'
-                            }
-                        />
-                        {globalStats.market_cap_change_percentage_24h_usd?.toFixed(
-                            2
-                        )}
-                        %
-                    </StatHelpText>
+                    {isLoading ? (
+                        <Spinner size="lg" />
+                    ) : (
+                        <>
+                            <StatNumber>
+                                {formatNumber.format(
+                                    globalStats.total_market_cap?.[
+                                        selectedCurrency
+                                    ]
+                                )}
+                            </StatNumber>
+                            <StatHelpText>
+                                <StatArrow
+                                    type={
+                                        globalStats.market_cap_change_percentage_24h_usd >=
+                                        0
+                                            ? 'increase'
+                                            : 'decrease'
+                                    }
+                                />
+                                {globalStats.market_cap_change_percentage_24h_usd?.toFixed(
+                                    2
+                                )}
+                                %
+                            </StatHelpText>
+                        </>
+                    )}
                 </Stat>
 
                 <Stat maxW="max-content" p="16px" pb="0px">
                     <StatLabel>Bitcoin Market Cap Dominance</StatLabel>
-                    <StatNumber>
-                        {globalStats.market_cap_percentage?.btc.toFixed(2)}%
-                    </StatNumber>
+                    {isLoading ? (
+                        <Spinner size="lg" />
+                    ) : (
+                        <>
+                            <StatNumber>
+                                {globalStats.market_cap_percentage?.btc.toFixed(
+                                    2
+                                )}
+                                %
+                            </StatNumber>
+                        </>
+                    )}
                 </Stat>
 
                 <Stat maxW="max-content" p="16px" pb="0px">
                     <StatLabel>Active Cryptocurrencies</StatLabel>
-                    <StatNumber>
-                        {globalStats.active_cryptocurrencies}
-                    </StatNumber>
+                    {isLoading ? (
+                        <Spinner size="lg" />
+                    ) : (
+                        <>
+                            <StatNumber>
+                                {globalStats.active_cryptocurrencies}
+                            </StatNumber>
+                        </>
+                    )}
                 </Stat>
             </StatGroup>
         </Box>
