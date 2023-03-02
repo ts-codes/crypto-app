@@ -2,9 +2,6 @@ import React from 'react';
 import { Box, Link, Text } from '@chakra-ui/react';
 
 const Footer = () => {
-    const date = new Date();
-    const year = date.getFullYear();
-
     return (
         <Box
             minH="100px"
@@ -15,7 +12,10 @@ const Footer = () => {
             py="30px"
         >
             <Text fontSize="xs" color="white">
-                © {year} Thomas. All rights reserved{' '}
+                Made by{' '}
+                <Link href="https://github.com/ts-codes" isExternal>
+                    Thomas Salmon
+                </Link>
             </Text>
             <Text fontSize="xs" color="white">
                 Powered by{' '}
