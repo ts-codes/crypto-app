@@ -8,8 +8,6 @@ import Home from './pages/Home';
 import CoinPage from './pages/CoinPage';
 import NotFound from './pages/NotFound';
 import Watchlist from './pages/Watchlist';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
 import CryptoProvider from './context/cryptoContext';
 import { Scrollbars } from 'rc-scrollbars';
 
@@ -24,8 +22,6 @@ function App() {
                             <Route path="/" element={<Home />} />
                             <Route path="*" element={<NotFound />} />
                             <Route path="/watchlist" element={<Watchlist />} />
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/sign-up" element={<SignUp />} />
                             <Route path="/crypto" element={<CoinPage />}>
                                 <Route
                                     path=":cryptoId"

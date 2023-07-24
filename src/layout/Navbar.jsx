@@ -46,7 +46,7 @@ const Navbar = () => {
                             display={{ base: 'none', md: 'inline-flex' }}
                         >
                             <NavLink to={'/watchlist'}>Watchlist</NavLink>
-                            <NavLink to={'/login'}>Login</NavLink>
+                            {/* <NavLink to={'/login'}>Login</NavLink> */}
                             {/* <NavLink to={'/sign-up'}>Sign-up</NavLink> */}
                         </HStack>{' '}
                         <Box display={{ base: 'none', md: 'block' }}>
@@ -116,12 +116,12 @@ const Navbar = () => {
                                     >
                                         Watchlist
                                     </NavLink>
-                                    <NavLink
+                                    {/* <NavLink
                                         to={'/login'}
                                         handleLinkClick={handleLinkClick}
                                     >
                                         Login
-                                    </NavLink>
+                                    </NavLink> */}
                                     {/* <NavLink
                                         to={'/sign-up'}
                                         handleLinkClick={handleLinkClick}
