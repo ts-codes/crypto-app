@@ -10,15 +10,20 @@ import {
     useColorModeValue,
     Box,
     Spinner,
+    Text,
 } from '@chakra-ui/react';
 
-const CryptoTable = ({ cryptos, isLoading }) => {
+const CryptoTable = ({ cryptos, isLoading, error }) => {
     const bgColor = useColorModeValue('gray.50', 'gray.700');
     return (
         <>
             {isLoading ? (
                 <Box maxW={'1050px'} h={'800px'} mx={'32px'} pt={'32px'}>
                     <Spinner size="xl" />
+                </Box>
+            ) : error ? (
+                <Box maxW={'1050px'} h={'800px'} mx={'32px'} pt={'32px'}>
+                    <Text fontSize="md">{error.message}</Text>
                 </Box>
             ) : (
                 <>

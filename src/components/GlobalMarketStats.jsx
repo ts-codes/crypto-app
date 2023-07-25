@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { CryptoContext } from '../context/cryptoContext';
+import useFetch from '../hooks/useFetch';
 import {
     Box,
     Stat,
@@ -13,7 +14,6 @@ import {
 
 const GlobalMarketStats = () => {
     const { selectedCurrency } = useContext(CryptoContext);
-    const [globalStats, setGlobalStats] = useState([]);
     const statsUrl = 'https://api.coingecko.com/api/v3/global';
     const formatNumber = new Intl.NumberFormat(undefined, {
         style: 'currency',
@@ -23,26 +23,16 @@ const GlobalMarketStats = () => {
         compactDisplay: 'short',
     });
 
-    const [isLoading, setIsLoading] = useState(true);
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const res = await fetch(statsUrl);
-                if (!res.ok) {
-                    throw new Error(
-                        `Failed to fetch data. Status code: ${res.status}`
-                    );
-                }
-                const data = await res.json();
-                setGlobalStats(data.data);
-                setIsLoading(false);
-            } catch (err) {
-                console.log(err);
-            }
-        }
+    const [globalStats, setGlobalStats] = useState([]);
+    const { data, isLoading } = useFetch(statsUrl);
 
-        fetchData();
-    }, [selectedCurrency]);
+    useEffect(() => {}, [selectedCurrency]);
+
+    useEffect(() => {
+        if (data) {
+            setGlobalStats(data.data);
+        }
+    }, [data]);
 
     return (
         <Box w="full" maxW={'1100px'} minH="60px" marginBlockEnd="40px">
@@ -54,7 +44,7 @@ const GlobalMarketStats = () => {
             >
                 <Stat maxW="max-content" p="16px" pb="0px">
                     <StatLabel>Total Market Cap</StatLabel>
-                    {isLoading ? (
+                    {isLoading || globalStats.length === 0 ? (
                         <Spinner size="lg" />
                     ) : (
                         <>
@@ -85,7 +75,7 @@ const GlobalMarketStats = () => {
 
                 <Stat maxW="max-content" p="16px" pb="0px">
                     <StatLabel>Bitcoin Market Cap Dominance</StatLabel>
-                    {isLoading ? (
+                    {isLoading || globalStats.length === 0 ? (
                         <Spinner size="lg" />
                     ) : (
                         <>
@@ -101,7 +91,7 @@ const GlobalMarketStats = () => {
 
                 <Stat maxW="max-content" p="16px" pb="0px">
                     <StatLabel>Active Cryptocurrencies</StatLabel>
-                    {isLoading ? (
+                    {isLoading || globalStats.length === 0 ? (
                         <Spinner size="lg" />
                     ) : (
                         <>
