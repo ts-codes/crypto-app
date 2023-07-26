@@ -1,23 +1,23 @@
-# Crypto App 
+# Crypto App
 
 View cryptocurrency prices, charts and market data.
 
+<img src="./crypto-app-screenshot-1.png" width="700px" />
 
 ## Features
 
-- Light/dark mode toggle
-- Mobile responsive
-- Trending cryptocurrencies
-- View crypto prices  in US Dollars, British Pounds, Euros
-- Search for coins and see suggestions
-- Save favourites to a watchlist (utilising local storage)
-
+-   Light/dark mode toggle
+-   Mobile responsive
+-   Trending cryptocurrencies
+-   View crypto prices in US Dollars, British Pounds, Euros
+-   Search for coins and see suggestions
+-   Save favourites to a watchlist (utilising local storage)
 
 ## Built with
 
-- [React](http://reactjs.org)
-- [Chakra UI](https://chakra-ui.com/)
-- [CoinGecko API](https://www.coingecko.com/en/api/documentation)
+-   [React](http://reactjs.org)
+-   [Chakra UI](https://chakra-ui.com/)
+-   [CoinGecko API](https://www.coingecko.com/en/api/documentation)
 
 ## Run Locally
 
